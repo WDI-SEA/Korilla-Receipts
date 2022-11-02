@@ -109,18 +109,59 @@ function App() {
 
 
   // set the state whenever a user enters words in that input field
-  const handleChange = (e) => {
+  // const handleChange = (e) => {
   
-    setNewState({
-      ...newState,
-      [e.target.name]: e.target.value
-    })
+  //   setNewState({
+  //     ...newState,
+  //     [e.target.name]: e.target.value
+  //   })
     
-    console.log('event target name: ', e.target.name)
-    console.log('event target value: ', e.target.value)
+  //   console.log('event target name: ', e.target.name)
+  //   console.log('event target value: ', e.target.value)
 
-    console.log('Handle change ran')
-  }
+  //   console.log('Handle change ran')
+  // }
+
+
+  // handle the nested state
+    // set the state whenever a user enters words in that input field
+    const handleChange = (e) => {
+  
+
+      const name =  e.target.name
+      const value =  e.target.value
+
+
+      // check for the values in order if they're changed
+      // first convert the order keys in newState to array
+      // second check if they include a selected input name
+      // third set the order state of it
+      // so in short it will set the person + order
+      if (Object.keys(newState.order).includes(name)){
+        setNewState({
+          ...newState,
+          order: {
+            ...newState.order,
+            [name]: value
+          }
+        })
+
+        // only set the person
+      } else {
+        console.log('It ran')
+        setNewState({
+          ...newState,
+          [name]: value
+        })
+      }
+
+      
+      console.log('event target name: ', name)
+      console.log('event target value: ', value)
+
+      console.log('Handle change ran')
+    }
+  
 
 
 
@@ -131,16 +172,16 @@ function App() {
       </header>
       <main>
         <div className='recipesContainer'>
-          {state.map(p =>
+          {state.map((p, idx) =>
 
-            <Receipt order={p}/>
+            <Receipt order={p} key={idx}/>
           )}
         </div>
 
         <div className='newOrder'>
           <div></div>
 
-        <div>
+        <div className='myNewOrder'>
         <h3>Add New Order</h3>
 
         <form onSubmit={addNewState}>
@@ -206,13 +247,5 @@ function App() {
   );
 }
 
-/*
-      main: 'Salad Bowl',
-      protein: 'Organic Tofu',
-      rice: 'none',
-      sauce: "K'lla",
-      toppings: ['Blue Potato Salad', 'Pico De Gallo', 'Red Kimchi'],
-      drink: 'Sparkling Blood Orange Soda',
-      cost: 20, */
 
 export default App;

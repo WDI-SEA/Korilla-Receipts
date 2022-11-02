@@ -17,9 +17,9 @@ function Receipt(props) {
 
         <h1>{props.order.person}</h1>
 
-        {Object.entries(props.order.order).map(item => 
+        {Object.entries(props.order.order).map((item,idx) => 
             
-            <p style={{fontWeight: 'bold'}}><span style={{color: 'purple'}}>{item[0]}:</span> {item[1]}</p>
+            <p style={{fontWeight: 'bold'}} key={idx}><span style={{color: 'purple'}}>{item[0]}:</span> {item[1]}</p>
             
             )}
 
