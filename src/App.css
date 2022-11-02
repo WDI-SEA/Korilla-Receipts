@@ -6,3 +6,20 @@
 .name {
   text-align: center;
 }
+
+.recipesContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 10px;
+}
+
+.newOrder {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.myNewOrder {
+  border: 2px solid blue;
+  margin: 10px;
+  padding: 10px;
+}
