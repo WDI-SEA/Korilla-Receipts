@@ -16,7 +16,7 @@ const initialState = [
       drink: 'Korchata',
       cost: 22,
     },
-    paid: false,
+    paid: true,
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const initialState = [
       drink: 'Korchata',
       cost: 19,
     },
-    paid: false,
+    paid: true,
   },
   {
     id: 3,
@@ -50,26 +50,28 @@ const initialState = [
 
 
 
-const updatedState =  {
-  id: 0,
-  person: '',
-  order: {
-    main: '',
-    protein: '',
-    rice: '',
-    sauce: '',
-    toppings: [''],
-    drink: '',
-    cost: 0,
-  },
-  paid: false,
-}
+
 
 
 
 
 
 function App() {
+
+  const updatedState =  {
+    id: 0,
+    person: '',
+    order: {
+      main: '',
+      protein: '',
+      rice: '',
+      sauce: '',
+      toppings: [''],
+      drink: '',
+      cost: 0,
+    },
+    paid: true,
+  }
 
   const [state, setState] = useState(initialState)
 
@@ -87,22 +89,7 @@ function App() {
     ])
 
     // reset the newState saved to empty
-    setNewState(
-      {
-        id: 0,
-        person: '',
-        order: {
-          main: '',
-          protein: '',
-          rice: '',
-          sauce: '',
-          toppings: [''],
-          drink: '',
-          cost: 0,
-        },
-        paid: false,
-      }
-    )
+    setNewState(updatedState)
 
     console.log(state)
   }
@@ -172,10 +159,14 @@ function App() {
       </header>
       <main>
         <div className='recipesContainer'>
-          {state.map((p, idx) =>
+          {state.map((p, idx) => {
 
-            <Receipt order={p} key={idx}/>
-          )}
+            if(p.paid){
+              return <Receipt order={p} key={idx}/>
+            }
+          
+            return null
+          })}
         </div>
 
         <div className='newOrder'>
