@@ -1,5 +1,6 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from 'react';
+import './components/Receipt'
+import Receipt from './components/Receipt';
 
 const initialState = [
   {
@@ -47,12 +48,46 @@ const initialState = [
 ];
 
 function App() {
+  let [state, setState]=useState(initialState)
+  let [person, setPerson]=useState("");
+  let [order, setOrder]=useState({main:'',protein:'',rice:'',sauce:'', drink:'',cost:''});
+
+  function handleChange(e){
+    if(e.target.id=="name"){
+      setPerson(e.target.value)
+    }else{
+      setOrder({...order,[e.target.id]:e.target.value})
+      
+    }
+  }
+ 
   return (
     <>
-      <header>
-        <h1 className="name">Korilla</h1>
-      </header>
-      <main></main>
+    <div id="wrap">
+              <header>
+                <h1 className="name">Korilla</h1>
+              </header>
+              <main>
+              {
+              state.map(ele=><Receipt data={ele}/>)
+        }
+              </main>
+          </div>
+          <hr/>
+      <form>     
+        <input id="name" placeholder='Name..' value={person}  onChange={handleChange}/>
+        <input id="main" placeholder='Main' value={order.main}  onChange={handleChange}/>
+        <input id="protein" placeholder='Protein' value={order.protein} onChange={handleChange}/>
+        <input id="rice" placeholder='Rice' value={order.rice} onChange={handleChange}/>
+        <input id="sauce" placeholder='Sauce' value={order.sauce} onChange={handleChange}/>
+        <input id="drink" placeholder='Drink' value={order.drink} onChange={handleChange}/>
+        <input id="cost" placeholder='Cost' value={order.cost} onChange={handleChange}/>
+        <button onClick={(e) => {
+        e.preventDefault();
+        setState([...state, {person, order:order} ]);
+        }}>Add</button>
+   
+      </form>
     </>
   );
 }

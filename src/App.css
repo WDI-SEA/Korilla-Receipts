@@ -1,8 +1,35 @@
-.container {
+#contain {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  width:16%;
+   height:400px;
+   padding-left: 2%;
+   margin-left: 3%;
+ 
+ 
+}
+main{
+  display: flex;
+  
 }
 
-.name {
-  text-align: center;
+.purp{
+  color: purple;
+}
+#wrapper{
+  border: "2px solid black";
+}
+form{
+  border: 2px solid black;
+}
+#order{
+  display: flex;
+  flex-direction: column;
+}
+input{
+  size:10
+}
+form{
+  margin-top:5%;
 }
