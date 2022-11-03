@@ -51,25 +51,29 @@ function App() {
   let [state, setState]=useState(initialState)
   let [person, setPerson]=useState("");
   let [order, setOrder]=useState({main:'',protein:'',rice:'',sauce:'', drink:'',cost:''});
- 
+
   function handleChange(e){
     if(e.target.id=="name"){
       setPerson(e.target.value)
     }else{
       setOrder({...order,[e.target.id]:e.target.value})
-      console.log(order)
       
     }
   }
-  
+ 
   return (
     <>
-      <header>
-        <h1 className="name">Korilla</h1>
-      </header>
-      <main>
-       {state.map(ele=><Receipt data={ele}/>)}
-      </main>
+    <div id="wrap">
+              <header>
+                <h1 className="name">Korilla</h1>
+              </header>
+              <main>
+              {
+              state.map(ele=><Receipt data={ele}/>)
+        }
+              </main>
+          </div>
+          <hr/>
       <form>     
         <input id="name" placeholder='Name..' value={person}  onChange={handleChange}/>
         <input id="main" placeholder='Main' value={order.main}  onChange={handleChange}/>
@@ -81,7 +85,7 @@ function App() {
         <button onClick={(e) => {
         e.preventDefault();
         setState([...state, {person, order:order} ]);
-        console.log(state)}}>Click me</button>
+        }}>Add</button>
    
       </form>
     </>
